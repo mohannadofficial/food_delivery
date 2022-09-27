@@ -14,7 +14,8 @@ class PlaceOrderBody {
   String? _createdTime;
 
   PlaceOrderBody(
-      {required List<CartsModel> cart,
+      {
+        required List<CartsModel> cart,
         required double orderAmount,
         required double distance,
         required String scheduleAt,

@@ -145,7 +145,9 @@ class CartFoodDetails extends StatelessWidget {
                               contactPersonName: cubit.profileModel!.name,
                               contactPersonNumber: cubit.profileModel!.phone,
                           );
-                          cubit.makePayment(placeOrder,context);
+                          if(!cubit.isLoading) {
+                            cubit.makePayment(placeOrder, context);
+                          }
                         }
                       }else {
                         SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(

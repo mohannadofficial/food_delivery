@@ -521,7 +521,7 @@ class AppDeliveryFoodCubit extends Cubit<AppDeliveryFoodStates> {
   Future<void> makePayment(PlaceOrderBody placeOrderBody, context) async {
     isLoading = true;
     try {
-      paymentIntentData = await createPaymentIntent('20', 'USD');
+      paymentIntentData = await createPaymentIntent(totalAmount.toString(), 'USD');
       await Stripe.instance.initPaymentSheet(
           paymentSheetParameters: SetupPaymentSheetParameters(
               paymentIntentClientSecret: paymentIntentData!['client_secret'],
@@ -559,11 +559,13 @@ class AppDeliveryFoodCubit extends Cubit<AppDeliveryFoodStates> {
 
 
       paymentIntentData =null;
+      checkOutData();
       emit(AppDeliveryFoodCheckOutStates());
       Navigator.push(context, MaterialPageRoute(builder: (context) {
         return const SuccessOrderFood();
       },));
       await DioHelper.postData(uri: PLACE_DETAILS_URI, token:token ,data: placeOrderBody.toJson()).then((value) {
+
       }).catchError((e){
         if (kDebugMode) {
           print('Error$e');
@@ -571,7 +573,6 @@ class AppDeliveryFoodCubit extends Cubit<AppDeliveryFoodStates> {
       });
       isLoading = false;
       await getOrderDetails();
-      checkOutData();
 
 
     } on StripeException catch (e) {

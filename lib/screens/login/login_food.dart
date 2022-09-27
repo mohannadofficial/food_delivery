@@ -59,145 +59,148 @@ class LoginFoodScreen extends StatelessWidget {
         },
         builder: (context, state) {
           var cubit = LoginFoodDeliveryCubit.get(context);
-          return Scaffold(
-            backgroundColor: Colors.white,
-            body: SafeArea(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.only(start: 20.h),
-                      child: Row(
-                        children: [
-                          IconAppPages(
-                            icon: Icons.arrow_back_ios_sharp,
-                            backGroundColor: AppColors.mainColor,
-                            color: Colors.white,
-                            function: (){
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    Center(
-                      child: Image(
-                        image: const AssetImage(
-                          'assets/image/logo_part_1.png',
-                        ),
-                        height: MediaQuery.of(context).size.height*0.20,
-                      ),
-                    ),
-                    SizedBox(height: 10.h,),
-                    Container(
-                      width: double.maxFinite,
-                      padding: EdgeInsetsDirectional.only(start: 20.r),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Hello',
-                            style: TextStyle(
-                              fontSize: 56.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            'Sign into your account',
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey[500],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 20.h,),
-                    AppTextForm(controller: phoneController, iconData: Icons.phone, hintText: 'Phone', textInputType: TextInputType.phone,),
-                    AppTextForm(
-                      controller: passwordController,
-                      iconData: Icons.password,
-                      hintText: 'Password',
-                      textInputType: TextInputType.visiblePassword,
-                      isPassword: cubit.isPassword,
-                      afterIcon: cubit.afterIcon,
-                      functionIcon: cubit.changeVisibility,
-                    ),
-                    SizedBox(height: 10.h,),
-                    Container(
-                      width: double.maxFinite,
-                      padding: EdgeInsetsDirectional.only(end: 20.r),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            'Sign into your account',
-                            textAlign: TextAlign.end,
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey[500],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: 30.h,),
-                    if(state is LoadingLoginFoodDeliveryStates)
-                      const CircularProgressIndicator(),
-                    if(state is! LoadingLoginFoodDeliveryStates)
-                      InkWell(
-                        onTap: () {
-                          if(checkValidation()){
-                            cubit.loginAccount(
-                                phone: phoneController.text,
-                                password: passwordController.text,
-                                context: context
-                            );
-                          }
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width*0.45,
-                          height: MediaQuery.of(context).size.height/13,
-                          decoration: BoxDecoration(
-                            color: AppColors.mainColor,
-                            borderRadius: BorderRadiusDirectional.circular(MediaQuery.of(context).size.width*0.25),
-                          ),
-                          child: Center(child: BigText(name: 'Sign in', color: Colors.white, size: 24.sp,),),
-                        ),
-                      ),
-                    SizedBox(height: 30.h,),
-                    RichText(
-                      text: TextSpan(
-                          text: 'Don\'t have an account?',
-                          style: TextStyle(
-                              color: Colors.grey[500],
-                              fontSize: 20.sp
-                          ),
+          return GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              body: SafeArea(
+                child: SingleChildScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.only(start: 20.h),
+                        child: Row(
                           children: [
-                            TextSpan(
-                                recognizer: TapGestureRecognizer()..onTap=(){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                                    return SignUpFoodScreen();
-                                  },));
-                                },
-                                text: ' Create',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 22.sp,
-                                    color: Colors.black
-                                )
-                            )
-                          ]
+                            IconAppPages(
+                              icon: Icons.arrow_back_ios_sharp,
+                              backGroundColor: AppColors.mainColor,
+                              color: Colors.white,
+                              function: (){
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: 5.h,),
-                  ],
+                      Center(
+                        child: Image(
+                          image: const AssetImage(
+                            'assets/image/logo_part_1.png',
+                          ),
+                          height: MediaQuery.of(context).size.height*0.20,
+                        ),
+                      ),
+                      SizedBox(height: 10.h,),
+                      Container(
+                        width: double.maxFinite,
+                        padding: EdgeInsetsDirectional.only(start: 20.r),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Hello',
+                              style: TextStyle(
+                                fontSize: 56.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'Sign into your account',
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey[500],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 20.h,),
+                      AppTextForm(controller: phoneController, iconData: Icons.phone, hintText: 'Phone', textInputType: TextInputType.phone,),
+                      AppTextForm(
+                        controller: passwordController,
+                        iconData: Icons.password,
+                        hintText: 'Password',
+                        textInputType: TextInputType.visiblePassword,
+                        isPassword: cubit.isPassword,
+                        afterIcon: cubit.afterIcon,
+                        functionIcon: cubit.changeVisibility,
+                      ),
+                      SizedBox(height: 10.h,),
+                      Container(
+                        width: double.maxFinite,
+                        padding: EdgeInsetsDirectional.only(end: 20.r),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              'Sign into your account',
+                              textAlign: TextAlign.end,
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey[500],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 30.h,),
+                      if(state is LoadingLoginFoodDeliveryStates)
+                        const CircularProgressIndicator(),
+                      if(state is! LoadingLoginFoodDeliveryStates)
+                        InkWell(
+                          onTap: () {
+                            if(checkValidation()){
+                              cubit.loginAccount(
+                                  phone: phoneController.text,
+                                  password: passwordController.text,
+                                  context: context
+                              );
+                            }
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width*0.45,
+                            height: MediaQuery.of(context).size.height/13,
+                            decoration: BoxDecoration(
+                              color: AppColors.mainColor,
+                              borderRadius: BorderRadiusDirectional.circular(MediaQuery.of(context).size.width*0.25),
+                            ),
+                            child: Center(child: BigText(name: 'Sign in', color: Colors.white, size: 24.sp,),),
+                          ),
+                        ),
+                      SizedBox(height: 30.h,),
+                      RichText(
+                        text: TextSpan(
+                            text: 'Don\'t have an account?',
+                            style: TextStyle(
+                                color: Colors.grey[500],
+                                fontSize: 20.sp
+                            ),
+                            children: [
+                              TextSpan(
+                                  recognizer: TapGestureRecognizer()..onTap=(){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                                      return SignUpFoodScreen();
+                                    },));
+                                  },
+                                  text: ' Create',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22.sp,
+                                      color: Colors.black
+                                  )
+                              )
+                            ]
+                        ),
+                      ),
+                      SizedBox(height: 5.h,),
+                    ],
+                  ),
                 ),
-              ),
 
+              ),
             ),
           );
         },
