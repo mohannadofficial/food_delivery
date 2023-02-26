@@ -1,6 +1,6 @@
 # Food Delivery App
 
-<img src="assets/image/downlaod2.png" height="500em" />
+<img src="assets/image/download2.png" height="500em" />
 
 ## Getting Started
 
